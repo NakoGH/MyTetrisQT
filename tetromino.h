@@ -6,15 +6,17 @@ class Tetromino
 {
 private:
     enum Constant::Carac data;
-    int orientation;
-    int rotationCenterX;
-    int rotationCenterY;
-
+    
 public:
     Tetromino();
 
+    int orientation;
+    int rotationCenterX;
+    int rotationCenterY;
+    
     void moveSide(int dir);
     void moveDown(int speed);
+    
     void rotate(int dir);
 
 };
