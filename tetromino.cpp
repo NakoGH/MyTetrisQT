@@ -4,13 +4,13 @@ Tetromino::Tetromino() {}
 
 void Tetromino::moveSide(int dir=1)
 {
-    rotationCenterX = rotationCenterX + dir;
+    X += dir;
 
 }
 
 void Tetromino::moveDown(int speed=1)
 {
-    rotationCenterY = rotationCenterY + speed;
+    Y += speed;
 
 }
 
