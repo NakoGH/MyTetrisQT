@@ -11,7 +11,7 @@ public:
     Tetromino();
 
     enum Constant::Carac data;
-    int orientation;
+    int orientation; // entre 0 et 3
     int X;
     int Y;
     
