@@ -17,6 +17,6 @@ void TetrisGame::softDrop() {
 
 
 void TetrisGame::tryMove(int dx, int dy) {
-    this->current.rotationCenterX += dx;
-    this->current.rotationCenterY += dy;
+    this->current.X += dx;
+    this->current.Y += dy;
 }

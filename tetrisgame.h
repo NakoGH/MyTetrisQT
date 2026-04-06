@@ -27,7 +27,6 @@ private:
     
     void tryMove(int dx, int dy);
 
-
     void tick();
 };
 #endif // TETRISGAME_H

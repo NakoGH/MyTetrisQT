@@ -1,6 +1,7 @@
 #ifndef TETROMINO_H
 #define TETROMINO_H
 #include "constant.h"
+#include <QColor>
 
 class Tetromino
 {
@@ -19,6 +20,8 @@ public:
     void moveDown(int speed);
     
     void rotate(int dir);
+
+    QColor colorof(Constant::Carac type);
 
 };
 
