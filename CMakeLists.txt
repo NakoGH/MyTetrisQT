@@ -12,14 +12,21 @@ qt_add_executable(appMyTetrisQT
     main.cpp
 )
 
+set_source_files_properties(Constants.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_qml_module(appMyTetrisQT
     URI MyTetrisQT
     QML_FILES
         Main.qml
+        Constants.qml
         SOURCES tetromino.h tetromino.cpp
-        SOURCES mino.h mino.cpp
+        SOURCES
         SOURCES constant.h
-        SOURCES board.h board.cpp
+        SOURCES tetrisboard.h tetrisboard.cpp
+        SOURCES tetrisgame.h tetrisgame.cpp
+        QML_FILES App.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
