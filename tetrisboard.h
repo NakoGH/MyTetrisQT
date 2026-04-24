@@ -16,17 +16,14 @@ public:
 
     TetrisBoard(QObject* parent = nullptr);
 
-    // ── Queries ──────────────────────────────────────────────────────────────
     bool canPlace(const Tetromino& t) const;
     bool isGameOver() const;
 
-    // ── Mutations ────────────────────────────────────────────────────────────
-    void lockPiece(const Tetromino& t);   // fige la pièce sur la grille
-    int  clearLines();                    // supprime lignes pleines, retourne le compte
-    void reset();                         // remet la grille à zéro
+    void lockPiece(const Tetromino& t);
+    int  clearLines();
+    void reset();
 
-    // ── QML interface ────────────────────────────────────────────────────────
-    // Liste de ROWS*COLS couleurs (QString) — "" = vide
+    // Liste de ROWS*COLS couleurs (QString)
     QVariantList cells() const;
 
     // Renvoie la ligne de drop (ghost piece)

@@ -15,9 +15,6 @@ TetrisGame::TetrisGame(QObject* parent)
     connect(&m_board, &TetrisBoard::boardChanged, this, &TetrisGame::boardChanged);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// start / pause
-// ─────────────────────────────────────────────────────────────────────────────
 void TetrisGame::start()
 {
     m_board.reset();
@@ -52,9 +49,7 @@ void TetrisGame::pause()
     emit runningChanged();
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 // tick — descend la pièce d'une ligne à chaque intervalle
-// ─────────────────────────────────────────────────────────────────────────────
 void TetrisGame::tick()
 {
     Tetromino moved = m_current;
@@ -68,9 +63,7 @@ void TetrisGame::tick()
     }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Mouvements joueur
-// ─────────────────────────────────────────────────────────────────────────────
+// Mouvements du joueur
 void TetrisGame::moveLeft()
 {
     if (!m_running || m_gameOver) return;
@@ -128,12 +121,9 @@ void TetrisGame::rotate()
             return;
         }
     }
-    // Aucun kick possible → rotation ignorée
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 // Hold
-// ─────────────────────────────────────────────────────────────────────────────
 void TetrisGame::holdPiece()
 {
     if (!m_running || m_gameOver || m_holdUsed) return;
@@ -157,9 +147,7 @@ void TetrisGame::holdPiece()
     emit boardChanged();
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// spawnNext — amène la pièce "next" en jeu, prépare une nouvelle "next"
-// ─────────────────────────────────────────────────────────────────────────────
+// genere la next pièce
 void TetrisGame::spawnNext()
 {
     m_current      = m_next;
@@ -180,9 +168,7 @@ void TetrisGame::spawnNext()
     }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// lockAndSpawn — fige la pièce, efface les lignes, spawne la suivante
-// ─────────────────────────────────────────────────────────────────────────────
+//fige la pièce, efface les lignes, spawne la suivante
 void TetrisGame::lockAndSpawn()
 {
     m_board.lockPiece(m_current);
@@ -196,9 +182,6 @@ void TetrisGame::lockAndSpawn()
     spawnNext();
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// tryMove
-// ─────────────────────────────────────────────────────────────────────────────
 void TetrisGame::tryMove(int dx, int dy)
 {
     Tetromino moved = m_current;
@@ -210,9 +193,7 @@ void TetrisGame::tryMove(int dx, int dy)
     }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// addScore — système de points Tetris Guideline (multiplié par le niveau)
-// ─────────────────────────────────────────────────────────────────────────────
+// système de points (cf le wiki Tetris Guideline )
 void TetrisGame::addScore(int cleared)
 {
     m_score += LINE_POINTS[cleared] * m_level;
@@ -230,21 +211,13 @@ void TetrisGame::addScore(int cleared)
     emit linesChanged();
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// updateTimerInterval — accélère selon le niveau
-// ─────────────────────────────────────────────────────────────────────────────
 void TetrisGame::updateTimerInterval()
 {
-    // Formule Tetris Guideline (en ms) : niveau 1 = 800ms, niveau 20 = ~33ms
+    // cf Guidelines : niveau 1 = 800ms, niveau 20 = ~33ms
     int ms = qMax(33, 800 - (m_level - 1) * 40);
     m_timer->setInterval(ms);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Exposition QML
-// ─────────────────────────────────────────────────────────────────────────────
-
-// cells : grille + pièce courante superposée
 QVariantList TetrisGame::cells() const
 {
     QVariantList list = m_board.cells(); // copie de la grille figée
@@ -270,7 +243,7 @@ QVariantList TetrisGame::ghost() const
     for (const auto& b : g.absoluteBlocks()) {
         int idx = b.y * TetrisBoard::COLS + b.x;
         if (idx >= 0 && idx < list.size())
-            list[idx] = QString("#444444"); // couleur fantôme
+            list[idx] = QString("#444444"); // couleur ghost
     }
     return list;
 }

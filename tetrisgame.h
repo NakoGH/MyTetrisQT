@@ -55,18 +55,17 @@ signals:
     void linesChanged();
     void runningChanged();
     void gameOverChanged();
-    void lineClearEffect(int count); // pour animations QML
+    void lineClearEffect(int count);
 
 private slots:
     void tick();
 
 private:
-    // ── État ──────────────────────────────────────────────────────────────────
     TetrisBoard   m_board;
     Tetromino     m_current;
     Tetromino     m_next;
     Tetromino     m_hold;
-    bool          m_holdUsed  = false; // une seule fois par pièce
+    bool          m_holdUsed  = false;
     bool          m_running   = false;
     bool          m_gameOver  = false;
     int           m_score     = 0;
@@ -74,14 +73,12 @@ private:
     int           m_lines     = 0;
     QTimer*       m_timer;
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
     void spawnNext();
     void tryMove(int dx, int dy);
     void lockAndSpawn();
     void addScore(int clearedLines);
     void updateTimerInterval();
-    QVariantList pieceToGrid(const Tetromino& t,
-                             int gridRows, int gridCols) const;
+    QVariantList pieceToGrid(const Tetromino& t, int gridRows, int gridCols) const;
 };
 
 #endif // TETRISGAME_H

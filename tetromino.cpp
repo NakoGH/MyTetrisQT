@@ -15,7 +15,7 @@ const Shape Tetromino::s_shapes[7][4] = {
     // O  (jaune)
     {
      Shape{{{1,0},{2,0},{1,1},{2,1}}},
-     Shape{{{1,0},{2,0},{1,1},{2,1}}},   // symétrique
+     Shape{{{1,0},{2,0},{1,1},{2,1}}},
      Shape{{{1,0},{2,0},{1,1},{2,1}}},
      Shape{{{1,0},{2,0},{1,1},{2,1}}},
      },
@@ -116,7 +116,7 @@ QColor Tetromino::colorOf(Type type)
 
 Tetromino Tetromino::random()
 {
-    // Initialise le seed une seule fois
+    // Initialise le seed pour l'aléatoire une seule fois
     static bool seeded = false;
     if (!seeded) { std::srand(std::time(nullptr)); seeded = true; }
 
